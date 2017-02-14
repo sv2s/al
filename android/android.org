@@ -1,0 +1,49 @@
+* packages/apps/Settings
+  
+** Settings 继承自 SettingsActivity
+
+*** Settings subclasses extends SettingsActivity
+
+**** WifiSettingsActivity   
+     <2016-12-07 Wed>
+
+     类中为空
+     AndroidManifest.xml中::
+     
+     #+BEGIN_SRC
+     <activity android:name="Settings$WifiSettingsActivity"
+                android:taskAffinity=""
+                android:label="@string/wifi_settings"
+                android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.WIFI_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"                //在SettingsActivity 中通过getMetaData()方法获取并赋值给mFragmentClass
+                android:value="com.android.settings.wifi.WifiSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wifi_settings" />
+        </activity>
+     #+END_SRC
+
+     getMetaData()(方法在SettingsActivity中)::
+     #+BEGIN_SRC 
+     private void getMetaData() {
+        try {
+            ActivityInfo ai = getPackageManager().getActivityInfo(getComponentName(),
+                    PackageManager.GET_META_DATA);
+            if (ai == null || ai.metaData == null) return;
+            mFragmentClass = ai.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);         //用于实例化fragment
+        } catch (NameNotFoundException nnfe) {
+            // No recovery
+            Log.d(LOG_TAG, "Cannot get Metadata for: " + getComponentName().toString());
+            }
+        }
+     #+END_SRC
+
+
+
+ 

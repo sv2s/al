@@ -1,0 +1,4 @@
+*** 编码 
+ decode()将xx解码为unicode
+ encode()将unicode以xx编码
+ 

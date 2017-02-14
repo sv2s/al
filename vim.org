@@ -1,0 +1,200 @@
+* base operate 
+** move the cursor
+   1.j down line , k up line , h left move , l right move
+   2.e move the cursor to the end of word.
+   3.b move the cursor to the beginning of the world.
+   4.0 move te cursor to the beginning of the line.(same as ^)
+   5.L move the cursor to end of the sreen.
+   6.gg move the cursor to the beginning of the file.
+   7.G move the cursor to the end of the file.
+   8.#| move the cursor to column #.
+   9.[[ jump to function start.
+   10.[{ jump to block start.
+   11.#L move cursor to the sreen the bottom #.(倒数#)
+   12.b/w forward/backward move cursor by one word 
+   13.$ move to the end of line 
+   14.+ move cursor to beginning of the next line
+   15._ move cursor to end of the next line
+   16.f:搜索命令，小写时向后搜索（用来定位）如 fx：定位到下一个x上。   Fx：定位到上一个x上，重复时，可用;或,  不过 , 表示反方向
+   17."H"意为Home, "M"为Middle, "L"为Last.  当前屏幕的上中下位置，大小写皆可
+   18.ctrl+u\d  向上\下滚动半屏
+      ctrl+e\y  向上\下滚动一行
+      ctrl+b\f  向上\下滚动一屏　　这个比较实用，记住。
+   19.zz:将当前行滚动于屏幕中间，方便查看上下文  zt置顶，zb置尾
+   
+** delete 
+   1.x delete an character ( #x ,delet #number character)
+   2.# d object or d # object :
+     object : w word
+              $ to end of the line
+              d one line
+   3.dw:删除一个单词（光标后部分）  不如：daw实用           
+** text editting 
+   1.i insert text before cursor
+   2.a insert text after cursor
+   3.A insert text in end of the line 
+   4.I inser text in beginning of the line
+   
+** undo and the undo the undo  
+   1.u undo
+   2.C-R undo the undo(C-r the same)
+
+** replace ,paste ,change ,copy
+   1.p paset some text(from delete or copy,pasteboard)
+   2.r replace the character
+   3.c change the character
+   4.cw change the word
+   5.c$ change to the end of a line(same as C)
+   6.yy copy the line
+   7.dd cut the line
+   8.D cut to the end of line.
+   9.d$ cut to the end of  line.
+   10.y& copy to the end of line.
+   11.:10,20 m 30  把10行到20行的内容，剪切到30行之后
+   12.:10,20 co 30   把10行到20行的内容，复制到30行之后
+   13.ynl:向后复制n个字符。 
+** fast move in a buffer
+   1.gg move cursor to the beginning of the buffer.
+   2.G move cursor to the bottom of the buffer.(same as L)
+   3.:# move cursor to # number line.
+   4.#G move cursor to # line.
+** search string 
+   1./string search string .(word)
+   2.n when search string,search the string again,point to next match string.
+   3.? search string in the backwards direction.
+   4.N search string in the opposite direction again.(word)
+   5.* search the word under cursor.
+   6./\c[string] search string ,case insensitive.(spacemacs not support).
+   7./jo[ha]n search john or joan
+   8./\<the 搜索以the开头的，the, theatre 或 then
+   9./the\> 搜索以the结尾的，the 或 breathe
+   10./\<the\> search the .
+   11./astring\/bstring search astring and bstring.
+   12./\<\d\d\d\d\>   搜索仅有四个数字的
+   13./^\n\{3}        搜索连续3个空行的
+   14.:bufdo /searchstr/  在所有打开buf中搜索
+** % find a matching ),]or }*
+   
+** replace some string 
+   1.s/oldString/newString  to replace oldString with newString the first occurrence on the line.
+   2.s/oldString/newString/g  replace will change all occurrences on the line.
+   3.#,#s/oldString/newString/g replace will change between two lines.
+   4.%s/oldString/newString/g replace in the whole buffer.
+   5.$s/oldString/newString/gi
+   6.%s/oldString/newString/gc confirm before replace.
+   7.5,$s/oldString/newString/g replace all occurences from line 2 to EOF
+   8.%s/^/hello/g replace the beginning of each line by hello.
+   9.%s/$/hello/g replace the end of each line by hello.
+   10.%s/*$//g delete all white spaces end of all line.  
+   11.%g/string/d delete all lines containing string.
+   12.%v/string/d delete all lines which didn't contaion string
+   13.:%s/^M//g               删掉DOS保存文件中(^M)
+   14.:%s#<[^>]\+>##g Delete HTML tags but keeps text
+   15.:%s/^\(.*\)\n\1$/\1/ Delete lines which appears twice
+   16.C-a increament number under the cursor(only vim)
+   17.C-x decrement number under cursor(only vim)
+** run an bash or other shell command
+   :!commad 
+
+** :#,# w filename save between the numbers of the text in the "filename" file.
+ 
+** :r filename copy the filename text in this buffer.
+   :23r filename insert the cotent of filename under line 23.
+** the open command
+   1.o open a line below the cursor
+   2.O open a line above the cursor
+
+** R :replace mode.
+** 大小写
+   1.Vu(U) lowercase(uppercase) line.
+   2.g~~ invert case
+   3.vEU switch word to uppercase
+   4.vE~ modify word case
+   5.ggguG set all text to lowercase
+   6.gggUG set all text to uppercase.
+   7.:set ignorecase ignore case in searches
+   8.:set smartcase ignore case in searces excepted if an uppercase letter is used
+   9.:%s/\<./\u&/g sets first letter of each word to uppercase
+   10.%s/\<./\l&/g sets first letter of each word to lowercase.
+   11.:%s/.*/\u& sets first letter of each line to uppercase.
+   12.:%s/.*/\l& sets first letter of each line to lowercase.
+** 文件浏览器
+   1.:e . open integrated file explorer
+   2.:Sex split window and open file explorer
+   3.:Sex! same as :Sex ,but split window vertically 
+   4.:ls list buffers
+   5.:cd .. move to parent directory
+   6.:args *.php open *.php files list
+   7.:grep expression *.php  返回包含expression的php文件列表
+   8.gf  打开光标下文件名对应的文件
+** tab/window
+   1.:tabnew  create a new tab
+   2.:gt show next tab
+   3.:tabfirst show first tab
+   4.:tabm postion rearrange tabs
+   5.:tabdo %s/foo/bar/g execute a command in all tabs
+   6.tab ball  puts all open files in tabs
+   7.:new abc.text edit abc.txt in new window
+** 分屏显示
+   1.:e filename  edit filename in current window
+   2.:split filename split the window and open filename
+   3.C-w up arrow : puts cursor in top window
+   4.C-w C-w put cursor in next window
+   5.C-w_ maximize current window vertically
+   6.C-w| maximize current window horizontally
+   7.C-w= gives the same size to all windows
+   8.C-w+ expand the window .
+   9.:vsplit file split window vertically
+   10.:sview file  same as :split in readonly mode
+   11.:hide close current window
+   12.:nly close all windows excepted current
+   13.:b 2 open #2 in this window
+** auto complete
+   1.C-n C-p complete world
+   2.C-x C-l complete line
+   3.:set dictionary=dict difine dict as a dictionary
+   4.C-x C-k complete with dictionary
+** marks
+   1.m {a-z} Marks current position as {a-z}
+   2.'{a-z} move to positon{a-z}
+   3." move to previous positionj
+** other base 
+   1.J merge the next line to the line.
+   2.nJ merget the nth line to the line.
+   3.:e! give up change ,it's reopen the file.
+   4.:e filename open file by the name.
+   5.:sav filename save file as filename/
+   6.:q exit vim
+   7.. Repeats the last change made in normal mode 
+   8.:ab old new : define old as abbreviation of new  
+   9.C-o 临时变成普通模式，一次
+   10.:set hlsearch  高亮显示查找结果
+      :set nohlsearch  取消高亮
+      :nohlsearch  去掉当前显示的高完（一次性）
+      `` 上次光标停靠的行
+   11..：重复上一个命令。
+** 文本缩进
+   1.:set autoindent turn on auto-indent
+   2.:set smartindent turn on intelligent auto-indent 
+   3.set shiftwidth=4 defines 4 spaces as indent size
+   4.C-t,C-d indent/un-indent in insert mode
+   5.>> indent 
+   6.<< un-indent
+   7.=% indent the code between parenthesisy
+   8.1GVG= indent the whole file
+** 语法高亮
+   1.：syntax on turn on syntax highlighting
+   2.:syntax off turn off
+   3.:set syntax=perl force syntax highlighting
+* some format for a command in normal state 
+  
+       [number]  command  object    OR    command  [number]  object
+     where:
+       number - is how many times to repeat the command
+       command - is what to do, such as  d  for delete
+       object - is what the command should act upon, such as  w  for word,
+                $  for "to the end of line", etc.
+
+                
+[[file:editcommand.png]]
+** TODO 

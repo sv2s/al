@@ -1,0 +1,21 @@
+1.int prctl(int option,unsigned long arg2,unsigned long arg3,unsigned long arg4,unsigned long arg5)
+    该系统调用指令是为进程制定而设计的，具体取决于参数option
+    example:
+        PR_SET_NAME :把参数arg2作为调用进程的经常名字。
+
+2.extern char *strdup(char *s);
+    strdup（）函数是c语言中常用的一种字符串拷贝库函数，一般和free（）函数成对出现。
+    功 能: 将串拷贝到新建的位置处
+    strdup()在内部调用了malloc()为变量分配内存，不需要使用返回的字符串时，需要用free()释放相应的内存空间，否则会造成内存泄漏。
+    返回一个指针,指向为复制字符串分配的空间;如果分配空间失败,则返回NULL值。
+
+3.unlikely(x)和likely(x)在linux内核/include/linux/compiler.h中宏定义如下：
+ 	#  define likely(x)	(__builtin_constant_p(x) ? !!(x) : __branch_check__(x, 1))
+	#  define unlikely(x)	(__builtin_constant_p(x) ? !!(x) : __branch_check__(x, 0))
+	还有一种：
+	# define likely(x)	__builtin_expect(!!(x), 1)
+	# define unlikely(x)	__builtin_expect(!!(x), 0)
+	
+	Gcc的内建函数 __builtin_constant_p 用于判断一个值是否为编译时常数，如果参数EXP 的值是常数，函数返回 1，否则返回 0。
+
+	__builtin_expect的函数原型为long  __builtin_expect (long exp, long c)，返回值为完整表达式exp的值，它的作用是期望表达式exp的值等于c（注意，如果exp == c条件成立的机会占绝大多数，那么性能将会得到提升，否则性能反而会下降）。

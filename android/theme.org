@@ -1,0 +1,12 @@
+* 状态栏的颜色 
+  android:windowTranslucentStatus  true单独使用状态栏半透明,并且activity内容占整个屏幕,需加上android:fitsSystemWindows true属性协调界面正常布局.
+  android:windowIsTranslucent 与上无关
+  style中:
+  1.colorPrimaryDark 定义的颜色
+  2.statusBarColor(windowDrawsSystemBarBackgrounds 为 true) 定义的颜色
+
+* style 的继承
+  1.style 节点中parent 属性声明
+  2.style name属性中.号分隔.
+      可以继承parent 的属性,也可以覆盖重写.
+      theme和style的范围不同

@@ -1,0 +1,4 @@
+** android 语言 
+| 中文名   | English name | code  | language |
+| 老挝     | Laotian      | lo_LA | ລາວ      |
+| 柬埔寨语 | Khmer        | km_KH | ខ្មែរ     |

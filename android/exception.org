@@ -1,0 +1,13 @@
+* RuntimeException && InflateException && InvocationTargetException
+  1. Caused by: java.lang.RuntimeException: Failed to resolve attribute at index 13
+     Caused by: android.view.InflateException: Binary XML file line #38: Error inflating class <unknown>
+     Caused by: java.lang.reflect.InvocationTargetException
+     by:packages/apps/Settings/res/layout/settings_main_prefs.xml:38
+     * <FrameLayout
+               android:id="@+id/main_content"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="?attr/preferenceBackgroundColor"   D
+               />
+       *   android:background="?attr/preferenceBackgroundColor"删除
+     
