@@ -1,0 +1,5 @@
+*** canvas.save() and restore method 
+    save():save the canvas current matrix, after this do some draw, these operation won't be changed in vision,after restore(),
+    we operation in save()'s matric.
+*** Xfermode
+
